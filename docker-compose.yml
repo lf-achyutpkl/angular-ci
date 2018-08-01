@@ -1,8 +1,7 @@
 version: "2.0"
 
 services:
-  webapp:
-    #build: .
+  vulcan-web-dev:
     image: node:9-alpine
     volumes:
     - .:/frontend
@@ -11,41 +10,19 @@ services:
     ports:
     - "3000:3000"
     working_dir: /frontend
-  # runapp:
-  #   extends:
-  #     service: webapp
-  #   ports:
-  #   - "3000:3000"
-  #   working_dir: /frontend
-  #   command:
-  #   - yarn start
-  production-build:
-    #build: .
+
+  vulcan-prod-build:
     image: node:9-alpine
     volumes:
     - .:/frontend
     entrypoint: /bin/sh
     command: -c "yarn && yarn build"
-    ports:
-    - "3000:3000"
     working_dir: /frontend
-  # runapp:
-  #   extends:
-  #     service: webapp
-  #   ports:
-  #   - "3000:3000"
-  #   working_dir: /frontend
-  #   command:
-  #   - yarn start
 
-  production-build:
-    #build: .
-    image: nginx
+  vulca-web-prod:
+    image: nginx:alpine
     volumes:
-    - .:/frontend
-    - .docker/nginx/conf:/etc/nginx/sites
-    entrypoint: /bin/sh
-    command: -c "yarn && yarn build"
+    - ./build:/usr/share/nginx/html/visa
+    - ./nginx.conf:/etc/nginx/conf.d/vulcan.conf
     ports:
-    - "3000:3000"
-    working_dir: /frontend
+    - "80:80"
