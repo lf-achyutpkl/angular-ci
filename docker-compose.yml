@@ -1,7 +1,7 @@
 version: "2.0"
 
 services:
-  vulcan-web-dev:
+  visa-web-dev:
     image: node:9-alpine
     volumes:
     - .:/frontend
@@ -11,7 +11,7 @@ services:
     - "3000:3000"
     working_dir: /frontend
 
-  vulcan-prod-build:
+  visa-prod-build:
     image: node:9-alpine
     volumes:
     - .:/frontend
@@ -19,7 +19,7 @@ services:
     command: -c "yarn && yarn build"
     working_dir: /frontend
 
-  vulca-web-prod:
+  visa-web-prod:
     image: nginx:alpine
     volumes:
     - ./build:/usr/share/nginx/html/visa

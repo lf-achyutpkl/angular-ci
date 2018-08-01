@@ -25,7 +25,7 @@ class App extends Component {
         <div className="App-intro">
           {this.state.schedules &&
             this.state.schedules.map(schedule => (
-              <p key={Math.floor(Math.random() * 6)}>{schedule.episode}</p>
+              <p key={schedule.subJobId}>{schedule.episode}</p>
             ))}
         </div>
       </div>
